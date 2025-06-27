@@ -1,0 +1,151 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background: #1a1a2e;
+  color: #f0f0f5;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background: #f9d423;
+  color: #222;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+main {
+  flex: 1;
+  padding: 1rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+section {
+  background: #292a4e;
+  padding: 1rem 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 0 20px #f9d423aa;
+}
+
+h1, h2 {
+  margin: 0 0 1rem 0;
+}
+
+#expense-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+#expense-form input,
+#expense-form select {
+  flex: 1 1 150px;
+  padding: 0.6rem 1rem;
+  border-radius: 15px;
+  border: none;
+  font-size: 1rem;
+}
+
+#expense-form button {
+  background: #f9d423;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 30px;
+  font-weight: 700;
+  color: #222;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  flex: 1 1 100px;
+  align-self: center;
+}
+
+#expense-form button:hover {
+  background: #fff;
+}
+
+#filter-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#filter-section select,
+#filter-section input {
+  flex: 1 1 150px;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  border: none;
+  font-size: 1rem;
+}
+
+#clear-filters {
+  background: #ee0979;
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#clear-filters:hover {
+  background: #f44336;
+}
+
+#expenses-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#expenses-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: #3a3b66;
+  border-radius: 15px;
+  margin-bottom: 0.6rem;
+  user-select: none;
+  transition: background 0.3s ease;
+}
+
+#expenses-list li:hover {
+  background: #4a4b7b;
+}
+
+.expense-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.expense-desc {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.expense-meta {
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+.delete-btn {
+  background: #f44336;
+  border: none;
+  color: white;
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  fo

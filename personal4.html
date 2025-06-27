@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rajmonde Haxhaj Portfolio</title>
+<style>
+  /* Reset and base */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body, html {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    color: #f0f0f5;
+    overflow-x: hidden;
+    background: #1a1a2e;
+    position: relative;
+  }
+
+  /* Animated gradient background waves */
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    top: -20%;
+    left: -20%;
+    width: 140%;
+    height: 140%;
+    background: linear-gradient(45deg, #764ba2, #667eea, #f9d423, #ff6a00, #ee0979);
+    background-size: 600% 600%;
+    animation: gradientMove 30s ease infinite;
+    filter: blur(100px);
+    z-index: -2;
+    opacity: 0.6;
+    border-radius: 50%;
+  }
+  body::after {
+    top: 10%;
+    left: 10%;
+    animation-delay: 15s;
+    opacity: 0.4;
+  }
+  @keyframes gradientMove {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+
+  /* Floating particles */
+  #particles {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .particle {
+    position: absolute;
+    background: rgba(249, 212, 35, 0.3);
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0% {
+      transform: translateY(100vh) scale(1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(-10vh) scale(0.5);
+      opacity: 0;
+    }
+  }
+
+  /* Gentle wave overlay using ::before on main */
+  main::before {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: url('data:image/svg+xml;utf8,<svg fill="%23f9d423" fill-opacity="0.1" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path d="M0,96L80,122.7C160,149,320,203,480,213.3C640,224,800,192,960,165.3C1120,139,1280,117,1360,106.7L1440,96L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"/></svg>') repeat-x bottom;
+    animation: waveMove 20s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+  }
+  @keyframes waveMove {
+    0% {
+      background-position-x: 0;
+    }
+    100% {
+      background-position-x: 1440px;
+    }
+  }
+
+  a {
+    color: #f0f0f5;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  a:hover {
+    color: #f9d423;
+  }
+  header {
+    background: rgba(0,0,0,0.3);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 999;
+  }
+  header nav a {
+    margin-left: 2rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  .logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    cursor: default;
+  }
+  main {
+    flex-grow: 1;
+    max-width: 900px;
+    margin: 3rem auto 5rem;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  section {
+    margin-bottom: 5rem;
+    position: relative;
+  }
+  h1, h2 {
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+  }
+  h1 {
+    font-size: 3rem;
+  }
+  h2 {
+    font-size: 2.25rem;
+    border-bottom: 3px solid #f9d423;
+    display: inline-block;
+    padding-bottom: 0.3rem;
+  }
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 600px;
+    color: #e0e0e8;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+  }
+
+  /* About Section */
+  #about {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    color: #f0f0f5;
+  }
+  #about .symbol {
+    width: 180px;
+    height: 180px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 10px #f9d423aa);
+    transition: transform 0.3s ease;
+    cursor: default;
+  }
+  #about .symbol:hover {
+    transform: rotate(15deg) scale(1.1);
+  }
+  #about .about-text {
+    flex: 1;
+    min-width: 280px;
+    max-width: 550px;
+  }
+  #about h1 {
+    font-weight: 900;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+  }
+  #about p {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+    color: #e0e0e8;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+  }
+  #about ul {
+    list-style: none;
+    padding-left: 0;
+    font-size: 1.1rem;
+    color: #f9d423;
+  }
+  #about ul li {
+    margin-bottom: 0.6rem;
+  }
+
+  /* Skills Section - modern with icons */
+  #skills {
+    text-align: center;
+  }
+  #skills h2 {
+    margin-bottom: 2rem;
+  }
+  .skills {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .skill {
+    background: rgba(255,255,255,0.1);
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill:hover {
+    transform: translateY(-10px) scale(1.1);
+    box-shadow: 0 15px 30px rgba(249, 212, 35, 0.8);
+  }
+  .skill svg {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0.5rem;
+    fill: #f9d423;
+    filter: drop-shadow(0 0 6px #f9d423bb);
+  }
+  /* Different background gradients for each skill */
+  .skill.java {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+  }
+  .skill.html {
+    background: linear-gradient(135deg, #e44d26, #f16529);
+  }
+  .skill.css {
+    background: linear-gradient(135deg, #264de4, #2965f1);
+  }
+  .skill.js {
+    background: linear-gradient(135deg, #f0db4f, #efd81d);
+    color: #333;
+  }
+
+  /* Projects Section */
+  #projects .project-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  .project-card {
+    background: rgba(255,255,255,0.1);
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .project-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 40px rgba(249, 212, 35, 0.8);
+  }
+  .project-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #f9d423;
+  }
+  .project-desc {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #ddd;
+    min-height: 60px;
+  }
+  .project-links a {
+    display: inline-block;
+    margin-right: 1rem;
+    background: #f9d423;
+    padding: 0.5rem 1.2rem;
+    border-radius: 30px;
+    font-weight: 700;
+    color: #333;
+    box-shadow: 0 4px 12px rgba(249, 212, 35, 0.6);
+    transition: background 0.3s, color 0.3s;
+  }
+  .project-links a:hover {
+    background: #fff;
+    color: #764ba2;
+  }
+
+  /* Contact Section - smaller and compact */
+  #contact {
+    max-width: 320px;  /* reduced width */
+    margin: 0 auto 5rem;
+    text-align: center;
+    background: rgba(255,255,255,0.15);
+    padding: 2rem 1.5rem; /* less padding */
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    backdrop-filter: blur(15px);
+  }
+  #contact h2 {
+    font-size: 2rem; /* slightly smaller heading */
+    margin-bottom: 1.5rem;
+  }
+  #contact .contact-item {
+    font-size: 1.1rem; /* smaller text */
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    color: #f0f0f5cc;
+    font-weight: 600;
+  }
+  #contact .contact-item svg {
+    width: 22px; /* smaller icons */
+    height: 22px;
+    fill: #f9d423;
+    filter: drop-shadow(0 0 8px #f9d423cc);
+    flex-shrink: 0;
+  }
+  #contact a {
+    color: #f9d423;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  #contact a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 1rem 0;
+    background: rgba(0,0,0,0.3);
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    color: #f0f0f5aa;
+  }
+
+  /* Scroll smooth */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    #about {
+      flex-direction: column;
+      align-items: center;
+    }
+    .skills {
+      gap: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Rajmonde Haxhaj</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+  <section id="about" aria-label="About me">
+    <!-- Modern abstract symbol -->
+    <svg class="symbol" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="grad2" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#f9d423"/>
+          <stop offset="100%" stop-color="#764ba2"/>
+        </linearGradient>
+      </defs>
+      <rect x="20" y="20" width="60" height="60" rx="15" ry="15" fill="url(#grad2)" />
+      <circle cx="50" cy="50" r="18" fill="#fff" />
+      <path fill="url(#grad2)" d="M50 32 L58 58 L42 58 Z" />
+    </svg>
+
+    <div class="about-text">
+      <h1>Hi, I'm Rajmonde!</h1>
+      <p>
+        I am a curious and detail-oriented developer with a passion for building interactive and user-friendly web applications. I enjoy turning complex problems into simple, beautiful solutions.
+      </p>
+      <ul>
+        <li>🚀 Skilled in Java, HTML, CSS, and JavaScript</li>
+        <li>💡 Always eager to learn new technologies</li>
+        <li>🎯 Focused on clean, maintainable code</li>
+        <li>🤝 Collaborative and communicative team player</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills" aria-label="Skills">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="skill java" title="Java">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <path d="M37.3 9.7c-1.6-1.3-3.7-1.8-5.7-1.5-.5 0-1 .1-1.5.3-2 .7-2.8 2.9-1.8 4.8.3.6.8 1.1 1.4 1.4 1 .5 1.7-.1 2.7-.5 1.2-.6 2-1.8 2.6-3 .1-.2.4-.8.3-1.2zM44.8 18.1c-.3-1.3-1.6-2-2.8-2.1-1.6 0-3 1-4.2 1.9-1.3 1.1-2.7 2.3-3.2 4-.1.3-.1.7 0 1 .5 1.8 2.1 2.4 3.8 2.4 1.5 0 3-.4 4.3-1.2 1.2-.8 2.5-2.5 1.9-4z"/>
+          <path d="M22.4 37.8c2.3.7 4.4-.3 6.4-1.4 1.1-.6 2.3-1.3 3.1-2.3.6-.7 1.1-1.7.9-2.6-.2-1-1.3-1.5-2.3-1.8-2.6-.9-5.4-.7-7.9.3-1.8.7-3.4 2-4.4 3.7-.4.6-.7 1.3-.7 2 .2 1.3 1.7 2 3 2.1z"/>
+          <path d="M40.6 34.5c-.7 1.6-2 3.1-3.6 3.9-1.2.6-2.6 1-3.9 1-1.4 0-2.7-.5-3.9-1.2-.8-.5-1.7-1.2-2.2-2.2-.6-1-.5-2.1 0-3.1.5-1.3 1.7-2.1 3-2.5 1.2-.4 2.7-.3 3.8 0 2 .6 3.5 2.3 4.1 4.1z"/>
+        </svg>
+        Java
+      </div>
+      <div class="skill html" title="HTML">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <path d="M11 2h42l-3.8 42.9L32 58 13.8 44.9z"/>
+          <path fill="#e44d26" d="M11 2l3.8 42.9L32 58l18.2-13.1 3.8-42.9H11z"/>
+          <path fill="#f16529" d="M32 23.4H17.9l.3 3.6H32v-3.6zM32 36.7H20.9l1.1 12.6L32 47.7l10 1.6 1.1-12.6H32z"/>
+        </svg>
+        HTML
+      </div>
+      <div class="skill css" title="CSS">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <path d="M11 2h42l-3.8 42.9L32 58 13.8 44.9z"/>
+          <path fill="#264de4" d="M32 23.4H17.9l.3 3.6H32v-3.6z"/>
+          <path fill="#2965f1" d="M32 36.7H20.9l1.1 12.6L32 47.7l10 1.6 1.1-12.6H32z"/>
+        </svg>
+        CSS
+      </div>
+      <div class="skill js" title="JavaScript">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <path d="M23.7 24.5c-1.2 0-2.1.4-2.7 1.3-.5.7-.6 1.4-.6 2.1h5.4c-.1 1.2-1 2.7-3 2.7-1.1 0-2.1-.6-2.5-1.2l-2 1.2c.7 1.5 2.3 2.6 4.7 2.6 2.7 0 4.6-1.6 4.6-4.4 0-2.7-2.1-3.9-4.7-3.9zm-2.4 4.4c.3-.5 1-.9 1.8-.9 1.3 0 2.2 1 2.2 2.4 0 1.6-1 2.5-2.3 2.5-1 0-1.7-.6-2-1.3l-1.3.8c.6 1.3 2 2.3 3.8 2.3 2.4 0 4-1.4 4-4 0-2.6-2.1-3.8-4.4-3.8-1.2 0-2 .6-2.4 1.2zm13-4.4h-2.3v10h2.3v-4.8c0-1.1.3-1.8 1.6-1.8 1 0 1.2.7 1.2 1.7v4.9h2.3v-5c0-2.9-1.6-3.9-3.5-3.9z"/>
+        </svg>
+        JavaScript
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" aria-label="Projects">
+    <h2>Projects</h2>
+    <div class="project-cards">
+      <div class="project-card">
+        <div class="project-title">Calculator (Java Swing)</div>
+        <div class="project-desc">A calculator with basic arithmetic using Java Swing.</div>
+        <div class="project-links">
+          <a href="https://github.com/RajmondaHaxhaj/java-calculator" target="_blank" rel="noopener noreferrer">Code</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-title">Student Management System (Java Console)</div>
+        <div class="project-desc">Console app managing students with login, file handling & grades.</div>
+        <div class="project-links">
+          <a href="https://github.com/RajmondaHaxhaj/student-record-system" target="_blank" rel="noopener noreferrer">Code</a>
+        </div>
+      </div>
+     <div class="project-card">
+        <div class="project-title">Expense Tracker</div>
+        <div class="project-desc">A web-based application to help users track their income and expenses in a user-friendly interface.</div>
+        <div class="project-links">
+          <a href="https://github.com/RajmondaHaxhaj/Expense-Tracker" target="_blank" rel="noopener noreferrer">Code</a>
+         <a href="Expense Tracker/project1.html" target="_blank" rel="noopener">Live Demo</a>
+        </div>
+      </div>
+   <div class="project-card">
+        <div class="project-title">To-Do List</div>
+        <div class="project-desc">A web application to help users manage tasks. It offers a clean interface for adding, editing and removing to-do items.</div>
+        <div class="project-links">
+          <a href="https://github.com/RajmondaHaxhaj/To-Do-List" target="_blank" rel="noopener noreferrer">Code</a>
+         <a href="To-Do List/project2.html" target="_blank" rel="noopener">Live Demo</a>
+        </div>
+      </div>     
+
+    </div>
+  </section>
+
+  <section id="contact" aria-label="Contact me">
+    <h2>Contact Me</h2>
+    <div class="contact-item">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+      <span>Rajmonde Haxhaj</span>
+    </div>
+    <div class="contact-item">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M3 5v14h18V5H3zm16 2l-8 5-8-5V7l8 5 8-5v.01z"/></svg>
+      <a href="mailto:rajmondahaxhaj@outlook.com">rajmondahaxhaj@outlook.com</a>
+    </div>
+    <div class="contact-item">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.091 15.091 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21 11.36 11.36 0 003.55 1.13 1 1 0 011 .99v3.33a1 1 0 01-1 1A16 16 0 014 5a1 1 0 011-1h3.33a1 1 0 01.99 1 11.36 11.36 0 001.13 3.55 1 1 0 01-.21 1.11l-2.2 2.2z"/></svg>
+      <span>+38345230797</span>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  &copy; 2025 Rajmonde Haxhaj. All rights reserved.
+</footer>
+
+<div id="particles"></div>
+
+<script>
+  // Generate floating particles randomly
+  const particlesContainer = document.getElementById('particles');
+  const colors = ['#f9d423', '#764ba2', '#667eea', '#ff6a00', '#ee0979'];
+  const particleCount = 40;
+
+  for(let i=0; i < particleCount; i++) {
+    const p = document.createElement('div');
+    p.classList.add('particle');
+    const size = Math.random() * 8 + 4; // 4px to 12px
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (10 + Math.random() * 20) + 's';
+    p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    particlesContainer.appendChild(p);
+  }
+</script>
+
+</body>
+</html>
